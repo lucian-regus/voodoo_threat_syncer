@@ -1,0 +1,6 @@
+.idea
+threat_syncer/*
+test.py
+__pycache__/*
+*/__pycache__
+
