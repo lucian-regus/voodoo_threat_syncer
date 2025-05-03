@@ -114,8 +114,8 @@ def update_threat_database():
             data = response.json()
             sync_database_with_api_data(data, cursor, connection)
 
-        except requests.RequestException:
-            logger.error("Update cycle failed")
+        except requests.RequestException as e:
+            logger.info(f"Update cycle failed: {e}")
         except Exception as e:
             logger.exception(f"Unexpected error during update: {e}")
         finally:
