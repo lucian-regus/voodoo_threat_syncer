@@ -4,18 +4,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Logging
-LOG_DIR = "/var/log/voodoo-av"
+LOG_DIR = "/var/log/voodoo"
 LOG_FILE = os.path.join(LOG_DIR, "threat_sync.log")
 
 # NFTables
-NFT_FILE_PATH = "/var/lib/voodoo-av/blacklist.nft"
+NFT_FILE_PATH = "/var/lib/voodoo/blacklist.nft"
 NFT_TABLE_NAME = "voodoo"
 NFT_SET_NAME = "blocked_ips"
 NFT_CHAIN_NAME = "drop_blacklisted_ips"
 
 # Yara Rules
-TEMP_YAR_FILE = "/var/lib/voodoo-av/temp_rules.yar"
-COMPILED_YARAC_FILE = "/var/lib/voodoo-av/compiled_rules.yarac"
+TEMP_YAR_FILE = "/var/lib/voodoo/temp_rules.yar"
+COMPILED_YARAC_FILE = "/var/lib/voodoo/compiled_rules.yarac"
 
 # .env config
 TARGET_DATABASE_NAME = os.getenv("TARGET_DATABASE_NAME")

@@ -35,7 +35,7 @@ def update_nft_ruleset(cursor):
     ips = fetch_blacklisted_ips(cursor)
     generate_nft_file(ips)
 
-    subprocess.run(["nft", "flush", "ruleset"])
-    subprocess.run(["nft", "-f", NFT_FILE_PATH])
+    subprocess.run(["sudo", "/usr/sbin/nft", "flush", "ruleset"])
+    subprocess.run(["sudo", "/usr/sbin/nft", "-f", NFT_FILE_PATH])
 
     logger.info("NFT Ruleset updated")
