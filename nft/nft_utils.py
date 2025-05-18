@@ -1,6 +1,7 @@
-from config import NFT_CHAIN_NAME, NFT_TABLE_NAME, NFT_SET_NAME, NFT_FILE_PATH
-import subprocess
-from logger_config import logger
+import socket
+
+from config import NFT_CHAIN_NAME, NFT_TABLE_NAME, NFT_SET_NAME, NFT_FILE_PATH, SOCKET_PATH
+
 
 def fetch_blacklisted_ips(cursor):
     cursor.execute('SELECT ip_address FROM blacklisted_ip_addresses WHERE allowed_at IS NULL;')
@@ -35,7 +36,12 @@ def update_nft_ruleset(cursor):
     ips = fetch_blacklisted_ips(cursor)
     generate_nft_file(ips)
 
-    subprocess.run(["sudo", "/usr/sbin/nft", "flush", "ruleset"])
-    subprocess.run(["sudo", "/usr/sbin/nft", "-f", NFT_FILE_PATH])
+    try:
+        client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        client.connect(SOCKET_PATH)
 
-    logger.info("NFT Ruleset updated")
+        client.sendall(("reload_nft" + "\n").encode("utf-8"))
+
+        client.close()
+    except socket.error as e:
+        print(f"Socket error: {e}")

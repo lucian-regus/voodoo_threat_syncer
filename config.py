@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+SOCKET_PATH = "/tmp/voodoo.sock"
+
 # Logging
 LOG_DIR = "/var/log/voodoo"
 LOG_FILE = os.path.join(LOG_DIR, "threat_sync.log")
